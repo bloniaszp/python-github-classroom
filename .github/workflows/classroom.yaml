@@ -1,16 +1,20 @@
-    name: GitHub Classroom Workflow
+name: GitHub Classroom Workflow
 
-    on: 
-      push: 
-        paths: 
-          # Do not run workflow unless these files were modified
-          - 'assignment.py' 
-          - 'test_assignment.py' 
+on: 
+  push: 
+    paths: 
+      # Do not run workflow unless these files were modified
+      - 'assignment.py' 
+      - 'test_assignment.py' 
 
-    jobs:
-      build:
-        name: Autograding
-        runs-on: ubuntu-latest
-        steps:
-          - uses: actions/checkout@v2
-          - uses: education/autograding@v1
+jobs:
+  build:
+    name: Autograding
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read  # Allow read access to the repository contents
+      pull-requests: write  # Allow the workflow to write comments on pull requests
+      checks: write  # Allow the workflow to report the results of checks
+    steps:
+      - uses: actions/checkout@v2
+      - uses: education/autograding@v1
